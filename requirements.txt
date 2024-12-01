@@ -1,8 +1,12 @@
 Flask
 Flask-Session
 Flask-SQLAlchemy
+flask_mail
 supabase
 psycopg2-binary
 flask-migrate
 python-dotenv
 datetime
+uuid
+psycopg2
+passlib[argon2]

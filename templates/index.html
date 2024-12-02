@@ -1,3 +1,24 @@
-{% extends "layout.html" %} {% block body %}
-<div>content</div>
+{% extends "layout.html" %} {% block content %}
+<div>
+  <div class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Quotes</h2>
+    <a href="/create" class="bg-primary text-white px-4 py-2 rounded"> Create Quote </a>
+  </div>
+  <div id="quote-list" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for quote in quotes %}
+    <div class="p-4 bg-white rounded shadow">
+      <p class="text-gray-800">{{ quote.quote }}</p>
+      {% if quote.can_edit %}
+      <div class="mt-2">
+        <a href="/edit/{{ quote.id }}" class="text-sm text-blue-500">Edit</a>
+        <a href="/delete/{{ quote.id }}" class="text-sm text-red-500 ml-2">Delete</a>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-center mt-6">
+    <button id="load-more" class="bg-primary text-white px-4 py-2 rounded">Load More</button>
+  </div>
+</div>
 {% endblock %}

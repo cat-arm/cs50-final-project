@@ -3,22 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sharing Quote</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>LoveQuotes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   </head>
-  <body class="bg-gray-100 text-gray-800">
-    <header class="bg-primary text-white py-4 shadow">
+  <body class="bg-gray-100">
+    <header class="bg-green-500 p-4">
       <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-lg font-bold">Sharing Quote</h1>
-        <nav>
-          <a href="/login" class="px-4 py-2 bg-secondary rounded text-white">Login</a>
-          <a href="/register" class="ml-2 px-4 py-2 bg-secondary rounded text-white">Register</a>
-        </nav>
+        <a href="/" class="text-white text-3xl font-bold">LoveQuotes</a>
+        <div class="space-x-4">
+          {% if session['user_id'] %}
+          <form action="/logout" method="POST" class="inline">
+            <button type="submit" class="text-white">Logout</button>
+          </form>
+          {% else %}
+          <a href="/login" class="text-white">Login</a>
+          <a href="/register" class="text-white">Register</a>
+          {% endif %}
+        </div>
       </div>
     </header>
-    <main class="container mx-auto my-6">{% block content %}{% endblock %}</main>
-    <footer class="bg-neutral text-center text-gray-600 py-4">
-      <p>© 2024 Sharing Quote. All rights reserved.</p>
+
+    <main class="container mx-auto mt-8">{% block content %}{% endblock %}</main>
+
+    <footer class="bg-neutral p-4 mt-8 text-center text-dark">
+      <p>&copy; 2024 LoveQuotes. All Rights Reserved.</p>
     </footer>
   </body>
 </html>

@@ -1,26 +1,30 @@
 {% extends "layout.html" %} {% block content %}
-<div class="flex justify-between mb-8">
-  <h2 class="text-2xl font-bold">All Quotes</h2>
-  {% if session['user_id'] %}
+<div class="flex justify-between mb-8 pr-8">
+  <h2 class="text-2xl font-bold pl-8">All Quotes</h2>
+  {% if 'create_own_content' in session['permissions'] %}
   <a href="/createquote" class="bg-green-500 text-white py-2 px-4 rounded-lg">Create Your Quote</a>
+  {% endif %} {% if 'updateadmin' in session['permissions'] %}
+  <a href="/managerole" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Manage Roles</a>
   {% endif %}
 </div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pr-8 pl-8">
   {% for content in contents %}
-  <div class="bg-white p-6 rounded-lg shadow-md">
+  <div class="bg-white p-6 rounded-lg shadow-emerald-100 relative">
+    {% if content.status == 'Ban' %}
+    <p class="text-red-400 mb-4 bg-black text-center">This content was banned. Please edit or delete the quote.</p>
+    {% else %}
     <p class="text-dark mb-4">{{ content.quote }}</p>
-    <div class="flex justify-between items-center">
-      <span class="text-sm text-gray-500">By: {{ content.posts_by }}</span>
-      {% if session['user_id'] == content.created_by %}
-      <div class="space-x-2">
-        <a href="/content/{{ content.id }}/edit" class="text-green-500">Edit</a>
-        <form action="/content/{{ content.id }}" method="POST" class="inline">
-          <button type="submit" class="text-red-500">Delete</button>
-        </form>
-      </div>
-      {% endif %} {% if session['role'] == 'admin' %}
-      <form action="/content/ban/{{ content.id }}" method="POST">
+    {% endif %}
+    <span class="absolute bottom-3 left-4 text-sm text-gray-500">By: {{ content.posts_by }}</span>
+    <div class="absolute bottom-2 right-4 space-x-2">
+      {% if 'update_own_content' in session['permissions'] or 'delete_own_content' in session['permissions'] %} {% if session['user_id'] == content.created_by %}
+      <a href="/content/{{ content.id }}/edit" class="text-green-500">Edit</a>
+      <form action="/content/{{ content.id }}/delete" method="GET" class="inline">
+        <button type="submit" class="text-red-500">Delete</button>
+      </form>
+      {% endif %} {% endif %} {% if 'ban' in session['permissions'] and content.status != 'Ban' %}
+      <form action="/content/{{ content.id }}/ban" method="GET" class="inline">
         <button type="submit" class="text-yellow-500">Ban</button>
       </form>
       {% endif %}

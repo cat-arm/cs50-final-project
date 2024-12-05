@@ -1,6 +1,7 @@
 Flask
 Flask-Session
 Flask-SQLAlchemy
+Flask-Limiter
 supabase
 psycopg2-binary
 Flask-Migrate

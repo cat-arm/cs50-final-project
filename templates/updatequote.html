@@ -1,0 +1,15 @@
+{% extends "layout.html" %} {% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-4">Update Your Quote</h2>
+  <form action="/content/{{ content.id }}/edit" method="POST">
+    <div class="mb-4">
+      <label for="quote" class="block text-dark mb-2">Quote</label>
+      <textarea id="quote" name="quote" rows="4" class="w-full p-2 border rounded" required>{{ content.quote }}</textarea>
+    </div>
+    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg">Update Quote</button>
+    {% if error %}
+    <div id="error-message" class="text-red-500 mt-2 text-center ease-in-out">{{error}}</div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

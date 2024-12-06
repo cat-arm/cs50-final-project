@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block content %}
+<div class="flex justify-between mb-8">
+  <h2 class="text-2xl font-bold pl-8">Manage User Roles</h2>
+</div>
+
+{% if 'updateadmin' in session['permissions'] %}
+<form class="pl-8 pr-8" action="{{ url_for('managerole') }}" method="POST">
+  <div class="mb-4">
+    <label for="user_email" class="block text-sm font-medium text-gray-700">Select User</label>
+    <select id="user_email" name="user_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+      {% for user in users %}
+      <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }} ({{ user.email }})</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <label for="role" class="block text-sm font-medium text-gray-700 mt-4">Select Role</label>
+  <select id="role" name="role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+    <option value="user">User</option>
+    <option value="admin">Admin</option>
+  </select>
+
+  <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4">Update Role</button>
+</form>
+{% else %}
+<div id="error-message" class="text-red-500 mt-2 text-center ease-in-out">You do not have permission to manage roles.</div>
+{% endif %} {% endblock %}

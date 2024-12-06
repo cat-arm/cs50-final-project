@@ -1,0 +1,19 @@
+# Python-related files
+*.pyc
+__pycache__/
+venv/
+.env
+
+# Flask-related files
+flask_session/
+instance/
+
+# Node.js and Tailwind-related files
+node_modules/
+package-lock.json
+package.json
+dist/
+
+# Database files
+*.sqlite
+*.db

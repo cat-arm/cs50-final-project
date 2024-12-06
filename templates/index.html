@@ -1,10 +1,14 @@
 {% extends "layout.html" %} {% block content %}
 <div class="flex justify-between mb-8 pr-8">
   <h2 class="text-2xl font-bold pl-8">All Quotes</h2>
-  {% if 'create_own_content' in session['permissions'] %}
-  <a href="/createquote" class="bg-green-500 text-white py-2 px-4 rounded-lg">Create Your Quote</a>
-  {% endif %} {% if 'updateadmin' in session['permissions'] %}
+  {% if session['user_id'] %} {% if 'updateadmin' in session['permissions'] %}
   <a href="/managerole" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Manage Roles</a>
+  {% elif 'ban' in session['permissions'] %}
+  <div></div>
+  {% else %}
+  <a href="/createquote" class="bg-green-500 text-white py-2 px-4 rounded-lg">Create Your Quote</a>
+  {% endif %} {% else %}
+  <a href="/createquote" class="bg-green-500 text-white py-2 px-4 rounded-lg">Create Your Quote</a>
   {% endif %}
 </div>
 

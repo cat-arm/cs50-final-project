@@ -44,3 +44,5 @@ class Content(Base):
     updated_at = Column(DateTime, default=datetime.now(timezone.utc))
 
     creator = relationship("User", back_populates="content")
+
+    # model for set database schema

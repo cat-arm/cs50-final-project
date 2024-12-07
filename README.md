@@ -1,20 +1,24 @@
-# cs50-final-project
+# LoveQuotes
+
+### Video Demo: https://www.youtube.com/watch?v=lZnvP881KfE
 
 ## Description
 
-This is for final project cs50 2024
-
-# Project Title
-
-## Description
-
-A brief description of what your project does and its purpose.
+Share your best code for each other.
 
 ## Features
 
-- **User Management**: Allows users to register, login, and manage their profiles.
-- **Role Management**: Users can be assigned different roles e.g. superadmin, admin, user, guest.
+- **User Management**: Allows users to register, login.
+- **Role Management**: Users can be assigned different roles --> admin, user.
 - **Content Management**: Users can create, edit, and delete their own content.
+- **Special Management**: Admins can ban content.
+
+## Roles
+
+- **Public**: Allows to read all qoutes
+- **User**: Allows users to register, login, create qoute, update qoute, delete qoute.
+- **Admin**: Allows to ban content.
+- **Superadmin**: Allows to select some account to switch role between user and admin.
 
 ## Tech Stack
 
@@ -22,18 +26,20 @@ A brief description of what your project does and its purpose.
 - **Flask**: Web framework.
 - **SQLAlchemy**: ORM for interacting with the database.
 - **HTML/CSS**: Frontend styling.
+- **tailwind**: CSS framework
 - **Supabase**: Database hosting.
 
 ## Installation
 
-- python-dotenv
 - Flask
 - Flask-Session
 - Flask-SQLAlchemy
-- flask-migrate
-- psycopg2-binary
+- Flask-Limiter
+- Flask-Migrate
 - supabase
-- datetime
+- python-dotenv
+- psycopg2-binary
+- passlib[argon2]
 
 ### Requirements
 
@@ -86,8 +92,29 @@ A brief description of what your project does and its purpose.
    pip install -r requirements.txt
    ```
 
-7. **Run the application**
+7. **Create file .env to set environment and register database or supabase**
 
    ```bash
-   python app.py
+   SUPABASE_URL=youe-database-url
+   SUPABASE_KEY=your-databse-key
+   PORT=your-port
+
+   SUPERADMIN_EMAIL="your-enail"
+   SUPERADMIN_PASSWORD="your-password"
+
+   FLASK_APP=app.py
+   FLASK_ENV=development
+   SECRET_KEY=your-secret-key
+   ```
+
+8. **Set superadmin account and create model at supabase**
+
+   ```bash
+   database. py
+   ```
+
+9. **Run the application**
+
+   ```bash
+   flask run --reload
    ```

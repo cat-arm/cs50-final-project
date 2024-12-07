@@ -1,36 +1,53 @@
 # LoveQuotes
+#### Video Demo: https://www.youtube.com/watch?v=lZnvP881KfE
+#### Description:
+LoveQuotes is a web-based application designed to connect users through meaningful quotes. With a focus on simplicity and community engagement, this project enables users to share their best thoughts, manage content, and interact with a structured user role system. The goal is to create an intuitive platform that combines creativity with robust user and content management functionality.
 
-### Video Demo: https://www.youtube.com/watch?v=lZnvP881KfE
+The application showcases a seamless integration of Python, Flask, and modern tools like Tailwind CSS for a polished user experience. It also leverages Supabase for database management, ensuring reliability and scalability
 
-## Description
-
-Share your best code for each other.
-
-## Features
-
-- **User Management**: Allows users to register, login.
-- **Role Management**: Users can be assigned different roles --> admin, user.
-- **Content Management**: Users can create, edit, and delete their own content.
-- **Special Management**: Admins can ban content.
+## Features:
+**User Management**
+- Enables users to register and securely log in to the platform.
+- Implements secure password hashing using passlib with Argon2.
+- Session management using Flask-Session to provide secure and persistent user sessions.
+**Role Management**
+- Users can be assigned specific roles: Public, User, Admin, or Superadmin.
+- Superadmins can manage user roles, promoting or demoting users between User and Admin.
+**Content Management**
+- Registered users can create, edit, and delete their quotes.
+- Public users can browse quotes but cannot modify or interact with them.
+**Special Features for Admins**
+- Admins have the ability to ban content that violates community guidelines.
+- Superadmins oversee overall platform management and enforce stricter controls.
+**Scalability and Responsiveness**
+- Built with Flask and Tailwind CSS for a responsive and mobile-friendly user experience.
+- Supabase ensures efficient data storage and retrieval.
 
 ## Roles
-
-- **Public**: Allows to read all qoutes
-- **User**: Allows users to register, login, create qoute, update qoute, delete qoute.
-- **Admin**: Allows to ban content.
-- **Superadmin**: Allows to select some account to switch role between user and admin.
+**Public**
+- Read-only access to all quotes.
+**User**
+- Can register, log in, and manage their quotes (create, edit, and delete).
+**Admin**
+- All User privileges.
+- Can ban inappropriate content.
+**Superadmin**
+- All Admin privileges.
+- Can promote or demote users between User and Admin roles
 
 ## Tech Stack
-
-- **Python**: Programming language used.
-- **Flask**: Web framework.
-- **SQLAlchemy**: ORM for interacting with the database.
-- **HTML/CSS**: Frontend styling.
-- **tailwind**: CSS framework
-- **Supabase**: Database hosting.
+**Backend**
+- Python
+- Flask (web framework)
+- Flask-SQLAlchemy (ORM)
+- Flask-Limiter (rate limiting for security)
+**Frontend**
+- HTML and CSS
+- Tailwind CSS for modern, responsive design
+**Database**
+- Supabase: A cloud-based database solution with easy integration for Flask.
 
 ## Installation
-
 - Flask
 - Flask-Session
 - Flask-SQLAlchemy
@@ -41,13 +58,11 @@ Share your best code for each other.
 - psycopg2-binary
 - passlib[argon2]
 
-### Requirements
-
+## Requirements
 - Python 3.x
 - pip (Python package installer)
 
-### Steps to Install
-
+## Steps to Install
 1. **Clone the repository**
 
    ```bash
@@ -92,29 +107,45 @@ Share your best code for each other.
    pip install -r requirements.txt
    ```
 
-7. **Create file .env to set environment and register database or supabase**
+7. **Install Tailwind CSS Dependencies**
 
    ```bash
+   npm install
+   ```
+
+8. **Build Tailwind CSS**
+
+   ```bash
+   npm run build
+   ```
+
+9. **Create a .env File**
+Add the following environment variable
+   ```bash
    SUPABASE_URL=youe-database-url
-   SUPABASE_KEY=your-databse-key
+   SUPABASE_KEY=your-database-key
    PORT=your-port
-
-   SUPERADMIN_EMAIL="your-enail"
+   SUPERADMIN_EMAIL="your-email"
    SUPERADMIN_PASSWORD="your-password"
-
    FLASK_APP=app.py
    FLASK_ENV=development
    SECRET_KEY=your-secret-key
    ```
 
-8. **Set superadmin account and create model at supabase**
+10. **Initialize the Database**
 
    ```bash
-   database. py
+   python database. py
    ```
 
-9. **Run the application**
+11. **Run the application**
 
    ```bash
    flask run --reload
+   ```
+
+12. **Access the Application**
+
+   ```bash
+    http://localhost:5000
    ```
